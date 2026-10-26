@@ -1,0 +1,8 @@
+{
+  "name": "daRTING",
+  "short_name": "daRTING",
+  "display": "standalone",
+  "background_color": "#12140f",
+  "theme_color": "#12140f",
+  "start_url": "/"
+}

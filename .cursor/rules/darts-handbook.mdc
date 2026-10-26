@@ -1,0 +1,16 @@
+---
+description: daRTING is a dart game. Game rules live in DARTS_HANDBOOK.md.
+alwaysApply: true
+---
+
+# daRTING source of truth
+
+This project is a dart game only. The rules are in `DARTS_HANDBOOK.md`.
+
+- Read that file before answering rules questions or writing game logic.
+- Do not ask the user to restate rules already in it.
+- The product is a phone-camera scorer with the game menu in the handbook. The playable build is the web app in `app/` (Vite, React, TypeScript). Flutter remains the packaging target when that SDK is available. Automatic tip detection is not implemented; the player taps the bed.
+- Default game: 501, straight in, double out.
+- Build the rules engine and voice before the camera.
+- Do not add equipment, oche, dress, tournament, league, or federation material unless the user asks.
+- If the user changes a rule, update the handbook and its change log in the same session.
