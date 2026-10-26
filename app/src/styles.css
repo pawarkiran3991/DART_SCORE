@@ -51,6 +51,43 @@ button.text {
   min-height: 100vh;
   margin: 0 auto;
   position: relative;
+  padding-bottom: 76px;
+}
+
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(480px, 100%);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: #1c2118;
+  border-top: 1px solid #34392e;
+  z-index: 4;
+}
+
+.dock button {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: center;
+  padding: 14px 4px;
+  font-size: 0.78rem;
+}
+
+.dock button.on {
+  color: #c6a15a;
+  font-weight: 700;
+}
+
+button.back {
+  width: auto;
+  background: #1c2118;
+  border: 1px solid #c6a15a;
+  color: #f3efe4;
+  text-align: center;
+  padding: 8px 14px;
 }
 
 .page {
@@ -58,6 +95,18 @@ button.text {
   flex-direction: column;
   gap: 12px;
   padding: 20px 16px 32px;
+}
+
+.match-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  position: sticky;
+  top: 0;
+  background: #12140f;
+  z-index: 2;
 }
 
 .mark {
@@ -141,7 +190,7 @@ h2 { font-size: 0.95rem; color: #b7b1a3; margin: 8px 0 0; font-weight: 600; }
 .toast {
   position: fixed;
   left: 50%;
-  bottom: 16px;
+  bottom: 72px;
   transform: translateX(-50%);
   background: #c6a15a;
   color: #1a160f;

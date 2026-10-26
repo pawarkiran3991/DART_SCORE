@@ -82,19 +82,26 @@ export function App() {
     setScreen("match");
   }
 
-  function leave() {
+  function leave(next: Screen = "home") {
     const current = engineRef.current;
-    if (current && !saved.current) {
+    if (screen === "match" && current && !saved.current) {
       saved.current = true;
       show(rememberMatch(current.result(current.view().over)));
     }
-    engineRef.current = null;
-    setScreen("home");
+    if (screen === "match") engineRef.current = null;
+    setScreen(next);
   }
 
   return (
     <main className="shell">
       {toast && <p className="toast">{toast}</p>}
+      <nav className="dock">
+        <button className={screen === "home" ? "on" : ""} onClick={() => leave("home")}>Home</button>
+        <button className={screen === "games" || screen === "setup" ? "on" : ""} onClick={() => leave("games")}>Games</button>
+        <button className={screen === "practice" ? "on" : ""} onClick={() => leave("practice")}>Practice</button>
+        <button className={screen === "boards" ? "on" : ""} onClick={() => leave("boards")}>Boards</button>
+        <button className={screen === "badges" ? "on" : ""} onClick={() => leave("badges")}>Awards</button>
+      </nav>
       {screen === "home" && <Home onPlay={() => setScreen("games")} onPractice={() => setScreen("practice")} onBoards={() => setScreen("boards")} onBadges={() => setScreen("badges")} />}
       {screen === "games" && <Games onBack={() => setScreen("home")} onPick={openGame} />}
       {screen === "setup" && (
@@ -150,7 +157,7 @@ function Home(props: { onPlay: () => void; onPractice: () => void; onBoards: () 
 function Games(props: { onBack: () => void; onPick: (game: GameDef) => void }) {
   return (
     <section className="page">
-      <button className="text" onClick={props.onBack}>Back</button>
+      <button className="back" onClick={props.onBack}>Back</button>
       <h1>Choose a game</h1>
       {groups().map((group) => (
         <div key={group}>
@@ -185,7 +192,7 @@ function Setup(props: {
   }
   return (
     <section className="page">
-      <button className="text" onClick={props.onBack}>Back</button>
+      <button className="back" onClick={props.onBack}>Back</button>
       <h1>{props.game.title}</h1>
       <p className="lede">{props.game.blurb}</p>
       <div className="row">
@@ -270,13 +277,13 @@ function Match(props: {
   }
   return (
     <section className="match">
+      <header className="match-bar">
+        <button className="back" onClick={props.onLeave}>Back</button>
+        <strong>{view.title}</strong>
+        <button className="back" onClick={() => props.onUndo(props.engine.undo())}>Undo</button>
+      </header>
       <Camera />
       <div className="score">
-        <header>
-          <button className="text" onClick={props.onLeave}>Leave</button>
-          <strong>{view.title}</strong>
-          <button className="text" onClick={() => props.onUndo(props.engine.undo())}>Undo</button>
-        </header>
         <div className="cards">
           {view.cards.map((card) => (
             <article key={card.id} className={card.active ? "card on" : "card"} style={{ borderColor: card.color }}>
@@ -385,7 +392,7 @@ function Practice(props: { onBack: () => void }) {
   const stats = name ? practiceFor(name) : null;
   return (
     <section className="page">
-      <button className="text" onClick={props.onBack}>Back</button>
+      <button className="back" onClick={props.onBack}>Back</button>
       <h1>Practice</h1>
       {names.length === 0 && <p className="lede">Play a game and every visit will show up here.</p>}
       {names.length > 0 && (
@@ -420,7 +427,7 @@ function Boards(props: { onBack: () => void }) {
   const boards = leaderboards();
   return (
     <section className="page">
-      <button className="text" onClick={props.onBack}>Back</button>
+      <button className="back" onClick={props.onBack}>Back</button>
       <h1>Leaderboards</h1>
       {boards.map((board) => (
         <div key={board.title}>
@@ -439,7 +446,7 @@ function Badges(props: { onBack: () => void }) {
   const rows = achievements();
   return (
     <section className="page">
-      <button className="text" onClick={props.onBack}>Back</button>
+      <button className="back" onClick={props.onBack}>Back</button>
       <h1>Achievements</h1>
       <p className="lede">These unlock while you play. Nothing stops the game.</p>
       {rows.length === 0 && <p className="hint">None yet.</p>}
