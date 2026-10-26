@@ -4,7 +4,7 @@ Source of truth for this project. Read this file before answering rules question
 
 This project is a **phone camera scorer** with a game menu. This file stores how each game is scored and how the app must behave. It does not cover boards, oches, dress, tournaments, leagues, or federation administration.
 
-- Status: planned. No app has been built yet.
+- The playable app is the web app in `app/`. Install and run steps are in `README.md`.
 - The home screen is a **game menu**. 301, 501, 701, and 1001 are all on it, with the group games below.
 - Default if the player just starts: **501**, straight in, double out.
 - Two players default to blue darts and red darts. A group can add more players, each with their own flight colour.
@@ -963,3 +963,4 @@ Store, per leg: remaining score or marks, darts thrown, visit scores, checkout, 
 | 2026-10-26 | Added the game menu: 301, 701, 1001, High Score, Average, Race, and the group games Knockout, Last One Standing, Follow the Leader, 21, Nine-Dart Century, Elimination, Scram, and Bowls. |
 | 2026-10-26 | Removed Football, Tic-Tac-Toe, and English Cricket. This project keeps dart games only. Subgames of 01, Cricket, Around the board, and the adding-up games are separate choices because each one plays differently. |
 | 2026-10-26 | Added the playable web app in `app/`. Camera is a live view. Scoring is by tapping the bed. Local storage keeps visits, leaderboards, and achievements. App Prisoner is the clockwise race, without capturing darts. |
+| 2026-10-26 | Added `README.md` with the purpose of the app and the install and run steps. |
